@@ -1,0 +1,31 @@
+<html>
+	<body>
+		<form th:action="@{/crearProducto}" th:object="${productoDto}" method="POST">
+			<span th:if="${productoDto.id}!=null"><input type="text" th:field="${productoDto.id}" readonly></span>
+			<input type="text" placeholder="nombre" th:field="${productoDto.nombre}"/>
+			<input type="text" placeholder="descripción" th:field="${productoDto.descripcion}"/>
+			<input type="text" placeholder="precio" th:field="${productoDto.precio}"/>
+			<input type="submit" th:value="${productoDto.id}!=null?'Guardar':'Crear'"/>
+		</form>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Descripción</th>
+					<th>Precio</th>
+					<th>Editar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="productoDto : ${productos}">
+					<td th:text="${productoDto.id}"></td>
+					<td th:text="${productoDto.nombre}"></td>
+					<td th:text="${productoDto.descripcion}"></td>
+					<td th:text="${productoDto.precio}"></td>
+					<td><a th:href="@{'/editarProducto/'+ ${productoDto.id}}">Editar</a></td>
+				</tr>
+			</bbody>
+		</table>
+	</body>
+</html>
